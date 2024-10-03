@@ -19,9 +19,12 @@ exports.postLogin = async (req, res) => {
     const user = await User.findOne({ where: { email } });
 
     if (user && await bcrypt.compare(senha, user.senha)) {
-        
+        req.session.userId = user.id_usuario;
+        req.session.userAcesso = user.acesso;
+
+        res.redirect('/perfil?sucessLogin=Login+Realizado+com+Sucesso!!!');
     } else {
-        
+        res.redirect('/login?errorCad=Usuário+e+Senha+Inválidos!!!');
     }
 };
 

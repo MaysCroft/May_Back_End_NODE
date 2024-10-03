@@ -11,11 +11,11 @@
 
     <form action="" method="post" name="logar" id="logar">
         <label for="e-mail"> E-mail: </label>
-        <input type="email" name="email" id="email" placeholder="Informe seu E-mail"/>
+        <input type="email" name="email" id="email" placeholder="Informe seu E-mail" required/>
         <br/> <br/>
 
         <label for="senha"> Senha: </label>
-        <input type="password" name="senha" id="senha" placeholder="Informe sua Senha"/>
+        <input type="password" name="senha" id="senha" placeholder="Informe sua Senha" required/>
         <br/> <br/>
 
         <input type="submit" name="entrar" id="entrar" value="ENTRAR">
@@ -25,4 +25,6 @@
 
     <p> Não possui login? <a href="/cadastrar"> Cadastre-se </a></p>
 </body>
+
+<script src="/js/scriptLogin.js"></script>
 </html>
