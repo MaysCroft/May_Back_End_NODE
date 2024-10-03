@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cadastro </title>
+</head>
+<body>
+
+    <h2> Cadastrar Usuário </h2>
+
+    <form action="" method="post" name="cad" id="cad" enctype="multipart/form-data">
+        <label for="nome"> Nome: </label>
+        <input type="text" name="nome" id="nome" placeholder="Informe seu Nome" required/>
+        <br/> <br/>
+
+        <label for="e-mail"> E-mail: </label>
+        <input type="email" name="email" id="email" placeholder="Informe seu E-mail" required/>
+        <br/> <br/>
+
+        <label for="contato"> Contato: </label>
+        <input type="tel" name="contato" id="contato" placeholder="Informe seu Contato" required/>
+        <br/> <br/>
+
+        <label for="senha"> Senha: </label>
+        <input type="password" name="senha" id="senha" placeholder="Informe sua Senha" required/>
+        <br/> <br/>
+
+        <label for="confSenha"> Confirmar Senha: </label>
+        <input type="password" name="confSenha" id="confSenha" placeholder="Confirme sua Senha" required/>
+        <br/> <br/>
+
+        <label for="foto_perfil"> Escolha a Foto para seu Perfil: </label>
+        <input type="file" name="avatar" id="avatar" accept="image/*" required/>
+        <br/> <br/>
+
+        <input type="submit" name="cadastrar" id="cadastrar" value="CADASTRAR">
+
+        <button><a href="/login">VOLTAR</a></button>
+    </form>
+
+</body>
+
+<script src="/js/scriptCad.js"></script>
+</html>
