@@ -21,11 +21,27 @@ exports.postLogin = async (req, res) => {
     if (user && await bcrypt.compare(senha, user.senha)) {
         req.session.userId = user.id_usuario;
         req.session.userAcesso = user.acesso;
+        req.session.userName = user.nome;
 
-        res.redirect('/perfil?sucessLogin=Login+Realizado+com+Sucesso!!!');
+        if (user.acesso === 'admin') {
+            res.redirect('/login?sucessLoginAdmin=Login+Realizado+com+Sucesso!!!');
+        } else {
+            res.redirect('/login?sucessLoginUser=Login+Realizado+com+Sucesso!!!');
+        }
+
     } else {
-        res.redirect('/login?errorCad=Usuário+e+Senha+Inválidos!!!');
+        res.redirect('/login?errorLogin=Usuário+e+Senha+Inválidos!!!');
     }
+};
+
+// Função para exibir a Tela de Perfil do Usuário
+exports.getPerfil = (req, res) => {
+    res.render('perfil', { userName: req.session.userName });
+};
+
+// Função para exibir a Tela de Admin do Usuário
+exports.getAdmin = (req, res) => {
+    res.render('admin', { userName: req.session.userName });
 };
 
 // Função para exibir a Tela de Cadastro de Usuário
