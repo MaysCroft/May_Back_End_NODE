@@ -1,7 +1,7 @@
 // CHECAR ACESSO
 
 module.exports.isAdmin = (req, res, next) => {
-    if (req.session.username = 'admin') {
+    if (req.session.username === 'admin') {
         return next(); // Se o usuário for admin, acessa o admin.
     } else {
         return res.status(403).send('Acesso Negado!!!, você não possui permissão de Admin! <a href="/login"> Voltar </a>');
