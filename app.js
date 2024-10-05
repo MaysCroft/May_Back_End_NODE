@@ -9,7 +9,7 @@ const PORTA = 3000;
 
 const app = express();
 
-// Middleware para codificar os arquivos e não permitir .html
+// Middleware para Codificar os arquivos e NÃO Permitir .html
 app.use(express.urlencoded( { extended:false } ));
 app.use(express.json());
 
@@ -19,14 +19,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Acesso a pasta Uploads onde fica os arquivos de imagem
 app.use('/uploads', express.static('uploads'));
 
-// Criar sessões de usuários no sistema
+// Criar Sessões de Usuários no Sistema
 app.use(session({
     secret:'senai456',
     resave: false,
     saveUninitialized: true
 }));
 
-// Utilizando rotas de acesso as páginas ejs(html)
+// Utilizando Rotas de Acesso as Páginas ejs(html)
 app.set('view engine', 'ejs');
 
 // Sincronizando o Banco de Dados com Sequelize(ORM)
@@ -34,7 +34,7 @@ sequelize.sync()
          .then(console.log('Banco de Dados Conectado com Sucesso!'))
          .catch(error => console.error(`${error}: Não foi possível Conectarao Banco de Dados!`));
 
-// Permissão para acesso as rotas
+// Permissão para Acesso as Rotas
 app.use(userRotas);
 
 app.listen(PORTA, () => {

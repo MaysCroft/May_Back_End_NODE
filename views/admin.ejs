@@ -4,12 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Administração </title>
+    <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
 
-    <h2> Seja Bem Vindo(a), <%= userName %> </h2>
+    <h2> Seja Bem Vindo(a) Administrador(a), <%= userName %> </h2>
 
     <p> Esta é sua página para gerenciar o Sistema </p>
+    <br/>
+
+    <h3> Usuários Cadastrados </h3>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th> ID      </th>
+            <th> NOME    </th>
+            <th> EMAIL   </th>
+            <th> CONTATO </th>
+            <th> ACESSO  </th>
+            <th> AVATAR  </th>
+            <th> AÇÕES   </th>
+        </tr>
+
+        <% users.forEach(user => { %>
+            <tr>
+                <td> <%= user.id_usuario %> </td>
+                <td> <%= user.nome       %> </td>
+                <td> <%= user.email      %> </td>
+                <td> <%= user.contato    %> </td>
+                <td> <%= user.acesso     %> </td>
+                <td> <img src="/uploads/<%= user.avatar %>" alt="<%= user.nome %>" class="avatar"></td>
+    
+                <th colspan="2">
+                    
+                    <form action="/edit/<%= user.id_usuario %>" method="post" class="btnedit">
+                        <button><a href="/edit/<%= user.id_usuario %>"> EDITAR </a></button>
+                    </form>
+
+                    <form action="/delete/<%= user.id_usuario %>" method="post" class="btn">
+                        <button type="submit"> EXCLUIR </button>
+                    </form>
+                </th>
+            </tr>
+        <% }); %>
+    </table>
     <br/>
 
     <button><a href="/logout"> LOGOUT </a></button>

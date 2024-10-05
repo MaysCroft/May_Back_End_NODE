@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Editar Usuário </title>
+</head>
+<body>
+
+    <h2> Editar Usuário </h2>
+
+    <form action="/edit/<%= user.id_usuario %>" method="post" name="edit" id="edit" enctype="multipart/form-data">
+
+        <label for="nome"> Nome: </label>
+        <input type="text" name="nome" id="nome" value="<%= user.nome %>" required/>
+        <br/> <br/>
+
+        <label for="email"> E-mail: </label>
+        <input type="email" name="email" id="email" value="<%= user.email %>" required/>
+        <br/> <br/>
+
+        <label for="contato"> Contato: </label>
+        <input type="text" name="contato" id="contato" value="<%= user.contato %>" required/>
+        <br/> <br/>
+
+        <label for="senha"> Nova Senha: </label>
+        <input type="password" name="senha" id="senha" placeholder="Informe sua Senha" required/>
+        <br/> <br/>
+
+        <label for="confirmar_senha"> Confirmar Senha: </label>
+        <input type="password" name="confSenha" id="confSenha" placeholder="Informe sua Senha" required/>
+        <br/> <br/>
+
+        <label for="foto_perfil"> Escolha a Foto para seu Perfil: </label>
+        <br/>
+
+        <input type="file" name="avatar" id="avatar" accept="image/*" required/>
+        <br/> <br/>
+
+        <input type="submit" name="editar" id="editar" value="EDITAR">
+        <button><a href="/admin">VOLTAR</a></button>
+    </form>    
+</body>
+
+<script src="/js/scriptEdit.js"></script>
+</html>

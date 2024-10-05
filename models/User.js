@@ -38,7 +38,7 @@ const User = sequelize.define('User', {
     },
 
     avatar: {
-        type: DataTypes.STRING, // Armazenar o caminho da imagem no servidor
+        type: DataTypes.STRING, // Armazenar o Caminho da Imagem no Servidor
         allowNull: false
     },
 }, { tableName: 'usuario' } );

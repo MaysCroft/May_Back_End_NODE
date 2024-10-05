@@ -1,0 +1,23 @@
+/* ESTILO */
+
+.avatar {
+    max-width: 100px;
+}
+
+.btnedit {
+    display: inline;
+}
+
+.btnedit button {
+    background-color: #00BFFF;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline;
+}
+
+.btn button {
+    background-color: #F00;
+    cursor: pointer;
+}
