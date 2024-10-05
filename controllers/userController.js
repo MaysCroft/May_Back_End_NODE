@@ -109,7 +109,6 @@ exports.postEditUser = async (req, res) => {
         res.redirect(`/edit/${req.params.id}?sucessEdit=Usuário+Alterado+com+Sucesso!!!`);
         console.log('Usuário Alterado com Sucesso!!!');
         
-
     } catch (error) {
         console.error(error);
         res.redirect(`/edit/${req.params.id}?errorEdit=Erro+ao+Alterar+Usuário!!!`);
