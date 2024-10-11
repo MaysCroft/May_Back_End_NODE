@@ -14,7 +14,7 @@ router.get('/cadastrar', userController.getCadastrar); // Cadastrar
 router.get('/perfil', checarAcesso.isAuthenticated, userController.getPerfil); // Perfil
 router.get('/admin', checarAcesso.isAdmin, userController.getAdmin);           // Admin
 
-// Rotas para Exibir e Editar o Usuário
+// Rotas para Exibir, Editar e Excluir o Usuário
 router.get('/edit/:id', checarAcesso.isAdmin, userController.getEditUser);
 router.post('/edit/:id', checarAcesso.isAdmin, upload.single('avatar'), userController.postEditUser);
 

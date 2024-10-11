@@ -105,7 +105,7 @@ exports.postEditUser = async (req, res) => {
             novaImagem = user.avatar;
         }
 
-        await User.update ( { nome, email, contato, senhaHash, novaImagem }, { where: { id_usuario: userId } } );
+        await User.update ( { nome, email, contato, senha:senhaHash, avatar:novaImagem }, { where: { id_usuario: userId } } );
         res.redirect(`/edit/${req.params.id}?sucessEdit=Usuário+Alterado+com+Sucesso!!!`);
         console.log('Usuário Alterado com Sucesso!!!');
         
