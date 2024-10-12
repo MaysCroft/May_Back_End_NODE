@@ -52,7 +52,7 @@ exports.getCadastrar = (req, res) => {
     res.render('cadastrar');
 };
 
-// Função para armazenar os Dados dos Usuários no Banco
+// Função para Armazenar os Dados dos Usuários no Banco
 exports.postCadastrar = async (req, res) => {
     
     const { nome, email, contato, senha } = req.body;
@@ -70,7 +70,7 @@ exports.postCadastrar = async (req, res) => {
     }
 };
 
-// Função para exibir a tela de Editar o Usuário
+// Função para Exibir a tela de Editar o Usuário
 exports.getEditUser = async (req, res) => {
     const userId = req.params.id;
     try {
@@ -96,22 +96,56 @@ exports.postEditUser = async (req, res) => {
             // Se houver uma imagem, use o nome da nova imagem
             novaImagem = req.file.filename;
 
+            // Removendo a Imagem Antiga, se houver
             if (user.avatar) {
-                const imagemAntiga = path.join(__dirname, '../uploads', user.avatar);
-                fs.unlinkSync(imagemAntiga); // Remover a Imagem Existente
+                const imagemAntiga = path.join(__dirname, '../uploads', user.avatar); // Verifica de o Path existe
+
+                if (fs.existsSync(imagemAntiga)) {
+                    console.log(imagemAntiga);
+                    fs.unlinkSync(imagemAntiga); // Remove a Imagem Antiga       
+                } else {
+                    console.log(`Arquivo não Encontrado: ${imagemAntiga}`);
+                    
+                }
             }
         } else {
             // Se nehuma nova image for enviada, mantenha a imagem existente
             novaImagem = user.avatar;
         }
 
-        await User.update ( { nome, email, contato, senha:senhaHash, avatar:novaImagem }, { where: { id_usuario: userId } } );
+        await User.update (
+            { nome, email, contato, senha:senhaHash, avatar:novaImagem }, 
+            { where: { id_usuario: userId } }
+        );
+
         res.redirect(`/edit/${req.params.id}?sucessEdit=Usuário+Alterado+com+Sucesso!!!`);
         console.log('Usuário Alterado com Sucesso!!!');
         
     } catch (error) {
         console.error(error);
         res.redirect(`/edit/${req.params.id}?errorEdit=Erro+ao+Alterar+Usuário!!!`);
+    }
+};
+
+// Função para Excluir as Informações do Usuário
+exports.getDeleteUser = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        const user = await User.findByPk(userId);
+        res.render('index', { user });
+    } catch (error) {
+        console.error(error);
+        res.render('/admin', { user:[], error: 'Erro ao Deletar Usuário'});
+    }
+};
+
+exports.postDeleteUser = async (req, res) => {
+    try {
+        await User.destroy( { where: {id_usuario: req.params.id} } );
+        res.redirect(`/admin?sucessDel=Usuário+excluído+com+sucesso`);
+    } catch (err) {
+        console.error(err);
+        res.redirect(`/admin?errorDel=Erro+ao+excluir+usuário`);
     }
 };
 

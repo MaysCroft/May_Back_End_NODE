@@ -18,6 +18,9 @@ router.get('/admin', checarAcesso.isAdmin, userController.getAdmin);           /
 router.get('/edit/:id', checarAcesso.isAdmin, userController.getEditUser);
 router.post('/edit/:id', checarAcesso.isAdmin, upload.single('avatar'), userController.postEditUser);
 
+router.get('/delet/:id', checarAcesso.isAdmin, userController.getDeleteUser);
+router.post('/delet/:id', checarAcesso.isAdmin, userController.postDeleteUser);
+
 // Rotas para Cadastrar e Logar Usuário no Banco
 router.post('/login', userController.postLogin);
 router.post('/cadastrar', upload.single('avatar'), userController.postCadastrar);

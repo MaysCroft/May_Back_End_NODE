@@ -40,7 +40,7 @@
                         <button><a href="/edit/<%= user.id_usuario %>"> EDITAR </a></button>
                     </form>
 
-                    <form action="/delete/<%= user.id_usuario %>" method="post" class="btn">
+                    <form action="/delet/<%= user.id_usuario %>" method="post" class="btn">
                         <button type="submit"> EXCLUIR </button>
                     </form>
                 </th>
@@ -52,4 +52,6 @@
     <button><a href="/logout"> LOGOUT </a></button>
     
 </body>
+
+<script src="/js/scriptDelete.js"></script>
 </html>
