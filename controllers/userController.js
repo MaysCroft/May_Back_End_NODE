@@ -82,7 +82,7 @@ exports.getEditUser = async (req, res) => {
     }
 };
 
-// Função para Editar as Informações do Usuário
+// Função para EDITAR as Informações do Usuário
 exports.postEditUser = async (req, res) => {
     const userId = req.params.id;
     const { nome, email, contato, senha } = req.body;
@@ -109,7 +109,7 @@ exports.postEditUser = async (req, res) => {
                 }
             }
         } else {
-            // Se nehuma nova image for enviada, mantenha a imagem existente
+            // Se nenhuma nova imagem for enviada, mantenha a imagem existente
             novaImagem = user.avatar;
         }
 
@@ -127,25 +127,89 @@ exports.postEditUser = async (req, res) => {
     }
 };
 
-// Função para Excluir as Informações do Usuário
-exports.getDeleteUser = async (req, res) => {
+// Função para EXCLUIR as Informações do Usuário
+
+// exports.getDeleteUser = async (req, res) => {
+//     const userId = req.params.id;
+//     try {
+//         const user = await User.findByPk(userId);
+//         res.render('index', { user });
+//     } catch (error) {
+//         console.error(error);
+//         res.render('/admin', { user:[], error: 'Erro ao Deletar Usuário'});
+//     }
+// };
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findByPk(userId);
+
+        const imagemAntiga = path.join(__dirname, '../uploads', user.avatar);
+
+        fs.access(imagemAntiga, fs.constants.F_OK, (err) => {
+            if (!err) {
+                fs.unlink(imagemAntiga, (err) => {
+                    if (err) {
+                        console.log("Erro ao Excluir a Imagem!");
+                    } else {
+                        console.log("Imagem Excluída com Sucesso!!!");                        
+                    }
+                });
+            } else {
+                console.log("Imagem Não Encontrada!");                
+            }
+        });
+
+        await User.destroy( { where: {id_usuario: req.params.id} } );
+        res.redirect(`/admin?sucessDel=Usuário+Excluído+com+Sucesso!`);
+    } catch (err) {
+        console.error(err);
+        res.redirect(`/admin?errorDel=Erro+ao+Excluir+Usuário!`);
+    }
+};
+
+// Função para ALTERAR as Informações do Usuário
+exports.getAlterUser = async (req, res) => {
     const userId = req.params.id;
     try {
         const user = await User.findByPk(userId);
         res.render('index', { user });
     } catch (error) {
         console.error(error);
-        res.render('/admin', { user:[], error: 'Erro ao Deletar Usuário'});
+        res.render('/admin', { user:[], error: 'Erro ao Alterar Permissões do Usuário'});
     }
 };
 
-exports.postDeleteUser = async (req, res) => {
+// exports.postAlterUser = async (req, res) => {
+//     try {
+//         await User.update( { where: {id_usuario: req.params.id},  }, { acesso: req.body.acesso } );
+//         res.redirect(`/admin?sucessAlt=Usuário+Alterado+com+Sucesso!`);
+//     } catch (err) {
+//         console.error(err);
+//         res.redirect(`/admin?errorAlt=Erro+ao+Alterar+permissões+do+Usuário!`);
+//     }
+// };
+
+exports.postAlterUser = async (req, res) => {
     try {
-        await User.destroy( { where: {id_usuario: req.params.id} } );
-        res.redirect(`/admin?sucessDel=Usuário+excluído+com+sucesso`);
+        const user = await User.findByPk(req.params.id);
+
+        if (user) {
+            const novoAcesso = user.acesso === 'admin' ? 'user' : 'admin';
+
+            await User.update(
+                { acesso: novoAcesso },
+                { where: { id_usuario: req.params.id } }
+            );
+
+            res.redirect(`/admin?sucessAlt=Permissões+do+Usuário+Alteradas+para+${novoAcesso}!`);
+        } else {
+            res.redirect(`/admin?errorAlt=Usuário+não+encontrado!`);
+        }
     } catch (err) {
         console.error(err);
-        res.redirect(`/admin?errorDel=Erro+ao+excluir+usuário`);
+        res.redirect(`/admin?errorAlt=Erro+ao+Alterar+permissões+do+Usuário!`);
     }
 };
 

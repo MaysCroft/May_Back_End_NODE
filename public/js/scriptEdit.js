@@ -16,7 +16,7 @@ document.getElementById('edit').addEventListener('submit', (e) => {
 
 // Função para exibir ao usuário que o cadastro foi realizado com sucesso
 function getMessage(msg) {
-    const urlParams = new URLSearchParams(window.location. search);
+    const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(msg);
 }
 

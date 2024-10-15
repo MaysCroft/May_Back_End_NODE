@@ -40,8 +40,12 @@
                         <button><a href="/edit/<%= user.id_usuario %>"> EDITAR </a></button>
                     </form>
 
-                    <form action="/delet/<%= user.id_usuario %>" method="post" class="btn">
+                    <form action="/delet/<%= user.id_usuario %>" method="post" class="btn" onsubmit="return confirmDelete()">
                         <button type="submit"> EXCLUIR </button>
+                    </form>
+
+                    <form action="/alter/<%= user.id_usuario %>" method="post" class="btnalter" onsubmit="return confirmAlter()">
+                        <button type="submit"> ALTERAR USUÁRIO </button>
                     </form>
                 </th>
             </tr>
@@ -54,4 +58,5 @@
 </body>
 
 <script src="/js/scriptDelete.js"></script>
+<script src="/js/scriptAlter.js"></script>
 </html>

@@ -19,5 +19,15 @@
 
 .btn button {
     background-color: #F00;
+    color: #FFFF;
+    cursor: pointer;
+}
+
+.btnalter {
+    display: inline;
+}
+
+.btnalter button {
+    background-color: #7FFFD4;
     cursor: pointer;
 }

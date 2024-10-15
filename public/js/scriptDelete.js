@@ -14,6 +14,10 @@ if (sucessDel) {
 }
 
 if (errorDel) {
-    alert(decodeURIComponent(errorEdit));
+    alert(decodeURIComponent(errorDel));
     window.location.href = '/admin';
+}
+
+function confirmDelete() {
+    return confirm("Tem certeza que deseja EXCLUIR este Usuário?");
 }
