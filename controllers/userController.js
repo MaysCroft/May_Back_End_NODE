@@ -181,16 +181,6 @@ exports.getAlterUser = async (req, res) => {
     }
 };
 
-// exports.postAlterUser = async (req, res) => {
-//     try {
-//         await User.update( { where: {id_usuario: req.params.id},  }, { acesso: req.body.acesso } );
-//         res.redirect(`/admin?sucessAlt=Usuário+Alterado+com+Sucesso!`);
-//     } catch (err) {
-//         console.error(err);
-//         res.redirect(`/admin?errorAlt=Erro+ao+Alterar+permissões+do+Usuário!`);
-//     }
-// };
-
 exports.postAlterUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
@@ -198,10 +188,7 @@ exports.postAlterUser = async (req, res) => {
         if (user) {
             const novoAcesso = user.acesso === 'admin' ? 'user' : 'admin';
 
-            await User.update(
-                { acesso: novoAcesso },
-                { where: { id_usuario: req.params.id } }
-            );
+            await User.update( { acesso: novoAcesso }, { where: { id_usuario: req.params.id } } );
 
             res.redirect(`/admin?sucessAlt=Permissões+do+Usuário+Alteradas+para+${novoAcesso}!`);
         } else {
@@ -213,7 +200,7 @@ exports.postAlterUser = async (req, res) => {
     }
 };
 
-// Função para sair do Sistema (Perfil ou Admin) - LOGOUT
+// Função para SAIR do Sistema (Perfil ou Admin) - LOGOUT
 exports.logout = (req, res) => {
     req.session.destroy();
     res.redirect('/login');

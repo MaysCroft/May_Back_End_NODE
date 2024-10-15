@@ -19,12 +19,5 @@ if (errorAlt) {
 }
 
 function confirmAlter() {
-
-    if (usuario.acesso === 'admin') {
-        usuario.acesso = 'user';
-    } else {
-        usuario.acesso = 'admin';
-    }
-    
     return confirm("Tem certeza que deseja ALTERAR as permissões deste Usuário?");
 }
