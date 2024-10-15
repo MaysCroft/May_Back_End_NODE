@@ -19,7 +19,6 @@ router.get('/edit/:id', checarAcesso.isAdmin, userController.getEditUser);
 router.post('/edit/:id', checarAcesso.isAdmin, upload.single('avatar'), userController.postEditUser);
 
 // Rota para Excluir o Usuário
-// router.get('/delet/:id', checarAcesso.isAdmin, userController.getDeleteUser);
 router.post('/delet/:id', checarAcesso.isAdmin, userController.deleteUser);
 
 // Rota para Alterar Permissões o Usuário
